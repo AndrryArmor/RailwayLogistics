@@ -43,8 +43,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Administrator.cs" />
+    <Compile Include="Client.cs" />
+    <Compile Include="Delivery.cs" />
+    <Compile Include="Locomotive.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Station.cs" />
+    <Compile Include="StatusType.cs" />
+    <Compile Include="System.cs" />
+    <Compile Include="Train.cs" />
+    <Compile Include="Wagon.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
