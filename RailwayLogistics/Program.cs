@@ -10,6 +10,10 @@ namespace RailwayLogistics
     {
         static void Main(string[] args)
         {
+            Console.WriteLine("Author: Achilov Andrii, IT-81");
+            Console.WriteLine("Version 1");
+            System system = new System();
+            system.Start();
         }
     }
 }

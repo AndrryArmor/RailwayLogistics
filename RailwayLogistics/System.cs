@@ -12,7 +12,8 @@ namespace RailwayLogistics
 
         public void Start()
         {
-
+            Console.WriteLine("Modeling started!");
+            Console.ReadKey();
         }
 
         public bool Authorise(string login, string password)
