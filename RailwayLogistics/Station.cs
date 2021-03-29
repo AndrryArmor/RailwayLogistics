@@ -8,7 +8,26 @@ namespace RailwayLogistics
 {
     public class Station
     {
-        public string Name { get; }
-        public List<Train> Trains { get; }
+        public Station()
+        {
+            Wagons = new List<Wagon>();
+            Locomotives = new List<Locomotive>();
+            Console.WriteLine("Створено об'єкт класу Station");
+        }
+
+        public Station(string name, IEnumerable<Wagon> wagons, IEnumerable<Locomotive> locomotives) : this()
+        {
+            Name = name;
+            Wagons.AddRange(wagons);
+            Locomotives.AddRange(locomotives);
+        }
+
+        public Station(Station other) : this(other.Name, other.Wagons, other.Locomotives)
+        {
+        }
+
+        public string Name { get; set; }
+        public List<Locomotive> Locomotives { get; }
+        public List<Wagon> Wagons { get; }
     }
 }

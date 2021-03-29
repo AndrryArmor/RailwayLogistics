@@ -8,9 +8,27 @@ namespace RailwayLogistics
 {
     public class Administrator
     {
+        public Administrator()
+        {
+            Console.WriteLine("Створено об'єкт класу Administrator");
+        }
+
+        public Administrator(string name, System system) : this()
+        {
+            Name = name;
+            System = system;
+        }
+
+        public Administrator(Administrator other) : this(other.Name, other.System)
+        {
+        }
+
+        public string Name { get; set; }
+        public System System { get; set; }
+
         public IEnumerable<Delivery> GetDeliveries()
         {
-            return new List<Delivery>();
+            return System.GetDeliveries();
         }
 
         public IEnumerable<Station> GetStations()
@@ -18,12 +36,12 @@ namespace RailwayLogistics
             return new List<Station>();
         }
 
-        public void CreateTrain(Locomotive locomotive, IEnumerable<Wagon> wagons)
+        public void AddTrainToDelivery(Delivery delivery, Train train)
         {
                
         }
 
-        public void ChangeDeliveryStatus(Delivery delivery)
+        public void MarkAsInProgress(Delivery delivery)
         {
 
         }

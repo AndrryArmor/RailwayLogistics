@@ -8,8 +8,24 @@ namespace RailwayLogistics
 {
     public class Wagon
     {
-        public int Weight { get; }
-        public int MaximumWeight { get; }
-        public int Volume { get; }
+        public Wagon()
+        {
+            Console.WriteLine("Створено об'єкт класу Wagon");
+        }
+
+        public Wagon(int weight, int maximumWeight, int volume) : this()
+        {
+            Weight = weight;
+            MaximumWeight = maximumWeight;
+            Volume = volume;
+        }
+
+        public Wagon(Wagon other) : this(other.Weight, other.MaximumWeight, other.Volume)
+        {
+        }
+
+        public int Weight { get; set; }
+        public int MaximumWeight { get; set; }
+        public int Volume { get; set; }
     }
 }
