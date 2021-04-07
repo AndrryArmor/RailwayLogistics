@@ -27,7 +27,7 @@ namespace RailwayLogistics
         }
 
         public string Name { get; set; }
-        public List<Locomotive> Locomotives { get; }
-        public List<Wagon> Wagons { get; }
+        public List<Locomotive> Locomotives { get; set; }
+        public List<Wagon> Wagons { get; set; }
     }
 }

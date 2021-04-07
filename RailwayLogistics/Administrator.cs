@@ -8,6 +8,8 @@ namespace RailwayLogistics
 {
     public class Administrator
     {
+        private string name;
+
         public Administrator()
         {
             Console.WriteLine("Створено об'єкт класу Administrator");
@@ -23,7 +25,20 @@ namespace RailwayLogistics
         {
         }
 
-        public string Name { get; set; }
+        public string Name
+        {
+            get
+            {
+                Console.WriteLine("З властивості Name класу Administrator було зчитано значення {0}", name);
+                return name;
+            }
+
+            set
+            {
+                name = value;
+                Console.WriteLine("Властивості Name класу Administrator присвоєно значення {0}", name);
+            }
+        }
         public System System { get; set; }
 
         public IEnumerable<Delivery> GetDeliveries()
@@ -38,7 +53,7 @@ namespace RailwayLogistics
 
         public void AddTrainToDelivery(Delivery delivery, Train train)
         {
-               
+
         }
 
         public void MarkAsInProgress(Delivery delivery)

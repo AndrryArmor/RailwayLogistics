@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace RailwayLogistics
@@ -13,7 +15,14 @@ namespace RailwayLogistics
             System system = new System();
             system.Start();
             Administrator administrator = system.Administrator;
-            Client client = system.AuthoriseNewClient("Oleksii");
+
+            Console.WriteLine("Ім'я адміністратора: {0}", administrator.Name);
+
+            Console.WriteLine("Введіть ім'я клієнта: ");
+            string adminName = Console.ReadLine();
+            Client client = system.AuthoriseNewClient(adminName);
+            Console.WriteLine("Ім'я клієнта: {0}", client.Name);
+
             client.AddDelivery("Пшениця", 150, 180, "Київ", "Вінниця");
             
             var deliveries = new List<Delivery>(administrator.GetDeliveries());

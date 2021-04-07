@@ -8,6 +8,7 @@ namespace RailwayLogistics
 {
     public class Client
     {
+        private string name;
 
         public Client()
         {
@@ -24,7 +25,20 @@ namespace RailwayLogistics
         {
         }
 
-        public string Name { get; set; }
+        public string Name
+        {
+            get
+            {
+                Console.WriteLine("З властивості Name класу Client було зчитано значення {0}", name);
+                return name;
+            }
+
+            set
+            {
+                name = value;
+                Console.WriteLine("Властивості Name класу Client присвоєно значення {0}", name);
+            }
+        }
         public System System { get; set; }
 
         public IEnumerable<Delivery> GetDeliveries()
@@ -32,7 +46,7 @@ namespace RailwayLogistics
             return new List<Delivery>();
         }
 
-        public void AddDelivery(string good, int weight, int volume,string  departureStation, string arrivalStation)
+        public void AddDelivery(string good, int weight, int volume, string departureStation, string arrivalStation)
         {
             Station _departureStation = System.Stations.Where(station => station.Name == departureStation).First();
             Station _arrivalStation = System.Stations.Where(station => station.Name == arrivalStation).First();
