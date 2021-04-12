@@ -11,7 +11,6 @@ namespace RailwayLogistics
         public Train()
         {
             Wagons = new List<Wagon>();
-            Console.WriteLine("Створено об'єкт класу Train");
         }
 
         public Train(Locomotive locomotive, List<Wagon> wagons) : this()

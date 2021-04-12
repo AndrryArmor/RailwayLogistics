@@ -8,11 +8,8 @@ namespace RailwayLogistics
 {
     public class Administrator
     {
-        private string name;
-
         public Administrator()
         {
-            Console.WriteLine("Створено об'єкт класу Administrator");
         }
 
         public Administrator(string name, System system) : this()
@@ -25,20 +22,7 @@ namespace RailwayLogistics
         {
         }
 
-        public string Name
-        {
-            get
-            {
-                Console.WriteLine("З властивості Name класу Administrator було зчитано значення {0}", name);
-                return name;
-            }
-
-            set
-            {
-                name = value;
-                Console.WriteLine("Властивості Name класу Administrator присвоєно значення {0}", name);
-            }
-        }
+        public string Name { get; set; }
         public System System { get; set; }
 
         public IEnumerable<Delivery> GetDeliveries()

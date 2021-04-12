@@ -15,7 +15,6 @@ namespace RailwayLogistics
         {
             Status = StatusType.Created;
             _trains = new List<Train>();
-            Console.WriteLine("Створено об'єкт класу Delivery");
         }
 
         public Delivery(string good, int weight, int volume, Station departureStation,
@@ -56,6 +55,31 @@ namespace RailwayLogistics
         public void CountPrice()
         {
             Price = RouteLength * Weight * Volume / 1000;
+        }
+
+        public static Delivery operator ++(Delivery delivery)
+        {
+            switch (delivery.Status)
+            {
+                case StatusType.Created:
+                    delivery.Status = StatusType.InProgress;
+                    Console.WriteLine("Статус замовлення змінено з 'Створено' на 'Виконується'");
+                    break;
+                case StatusType.InProgress:
+                    delivery.Status = StatusType.Done;
+                    Console.WriteLine("Статус замовлення змінено з 'Виконується' на 'Виконано'");
+                    break;
+                case StatusType.Done:
+                default:
+                    throw new InvalidOperationException($"Cannot change delivery status {delivery.Status}");
+            }
+            return delivery;
+        }
+
+        public static bool operator !(Delivery delivery)
+        {
+            Console.WriteLine("Статус замовлення - 'Виконано'? - {0}", delivery.Status == StatusType.Done);
+            return delivery.Status == StatusType.Done;
         }
     }
 }

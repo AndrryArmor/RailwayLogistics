@@ -8,11 +8,8 @@ namespace RailwayLogistics
 {
     public class Client
     {
-        private string name;
-
         public Client()
         {
-            Console.WriteLine("Створено об'єкт класу Client");
         }
 
         public Client(string name, System system) : this()
@@ -25,20 +22,7 @@ namespace RailwayLogistics
         {
         }
 
-        public string Name
-        {
-            get
-            {
-                Console.WriteLine("З властивості Name класу Client було зчитано значення {0}", name);
-                return name;
-            }
-
-            set
-            {
-                name = value;
-                Console.WriteLine("Властивості Name класу Client присвоєно значення {0}", name);
-            }
-        }
+        public string Name { get; set; }
         public System System { get; set; }
 
         public IEnumerable<Delivery> GetDeliveries()

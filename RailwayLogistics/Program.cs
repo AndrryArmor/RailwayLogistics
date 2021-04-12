@@ -15,22 +15,31 @@ namespace RailwayLogistics
             System system = new System();
             system.Start();
             Administrator administrator = system.Administrator;
-
-            Console.WriteLine("Ім'я адміністратора: {0}", administrator.Name);
-
-            Console.WriteLine("Введіть ім'я клієнта: ");
-            string adminName = Console.ReadLine();
-            Client client = system.AuthoriseNewClient(adminName);
-            Console.WriteLine("Ім'я клієнта: {0}", client.Name);
+            Client client = system.AuthoriseNewClient("Oleksii");
 
             client.AddDelivery("Пшениця", 150, 180, "Київ", "Вінниця");
             
             var deliveries = new List<Delivery>(administrator.GetDeliveries());
             var delivery = deliveries[0];
+            Console.WriteLine("Створено нове замовлення:\n" + 
+                "Товар: {0}\n" + 
+                "Маса: {1}\n" + 
+                "Об'єм: {2}\n" + 
+                "Станція відправлення: {3}\n" + 
+                "Станція прибуття: {4}", delivery.Good, delivery.Weight, delivery.Volume, delivery.DepartureStation.Name, delivery.ArrivalStation.Name);
+            Console.WriteLine();
+
             var locomotive = delivery.DepartureStation.Locomotives[0];
+            if (locomotive < delivery.ArrivalStation.Locomotives[0])
+                locomotive = delivery.ArrivalStation.Locomotives[0];
+            
             var wagons = delivery.DepartureStation.Wagons;
-            administrator.AddTrainToDelivery(delivery, new Train(locomotive, wagons));
-            administrator.MarkAsInProgress(delivery);
+
+            administrator.AddTrainToDelivery(delivery, new Train(locomotive, wagons[0] + wagons[2]));
+
+            delivery++;
+            delivery++;
+
             Console.ReadKey();
         }
     }

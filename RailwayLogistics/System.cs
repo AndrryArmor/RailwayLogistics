@@ -27,7 +27,7 @@ namespace RailwayLogistics
                     },
                     new List<Locomotive>
                     {
-                        new Locomotive(40, 200)
+                        new Locomotive(45, 240)
                     }),
                 new Station("Вінниця",
                     new List<Wagon>
@@ -49,10 +49,9 @@ namespace RailwayLogistics
                     },
                     new List<Locomotive>
                     {
-                        new Locomotive(40, 200)
+                        new Locomotive(37, 190)
                     })
             };
-            Console.WriteLine("Створено об'єкт класу System");
         }
 
         public System(IEnumerable<Delivery> deliveries) : this()
