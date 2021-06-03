@@ -8,10 +8,8 @@ namespace RailwayLogistics
 {
     public class User : Client
     {
-        public User(string name, ISystem system) : base(name, system)
+        public User(string name, ISystem system) : base(name, null, system)
         {
-            Name = name;
-            System = system;
         }
 
         public IEnumerable<Delivery> GetDeliveries()
@@ -21,12 +19,17 @@ namespace RailwayLogistics
 
         public void AddDelivery(string good, int weight, int volume, string departureStation, string arrivalStation)
         {
+            if (weight <= 0 || volume < 0)
+                throw new ArgumentOutOfRangeException();
+
             Station _departureStation = System.GetStations().Where(station => station.Name == departureStation).First();
             Station _arrivalStation = System.GetStations().Where(station => station.Name == arrivalStation).First();
             Delivery delivery = new Delivery(good, weight, volume, _departureStation, _arrivalStation);
             delivery.RouteLength = System.CalculateRouteLength(_departureStation, _arrivalStation);
             delivery.CountPrice();
             System.AddDelivery(delivery);
-        }
+
+            Console.WriteLine("Замовлення додано");
+        } 
     }
 }

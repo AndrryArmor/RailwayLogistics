@@ -8,13 +8,14 @@ namespace RailwayLogistics
 {
     public abstract class Client
     {
-        protected Client(string name, ISystem system, bool isAdministrator = false)
+
+        protected Client(string name, string password, ISystem system, bool isAdministrator = false)
         {
             Name = name;
             System = system;
             IsAdministrator = isAdministrator;
 
-            system.AuthoriseNewClient(this);
+            system.AuthoriseNewClient(this, password);
         }
 
         public string Name { get; set; }

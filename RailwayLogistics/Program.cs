@@ -13,23 +13,43 @@ namespace RailwayLogistics
         static void Main(string[] args)
         {
             System system = new System();
-            var admin = new Administrator("Admin", system);
+            Administrator admin;
+
+            do
+            {
+                Console.WriteLine("Введіть пароль адміністратора: ");
+                string adminPassword = Console.ReadLine();
+                try
+                {
+                    admin = new Administrator("Admin", adminPassword, system);
+                    break;
+                }
+                catch (RegistrationException ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
+            }while (true) ;
+
             var user = new User("Oleksii", system);
 
             user.AddDelivery("Пшениця", 150, 180, "Київ", "Вінниця");
-            Console.WriteLine("Замовлення додано");
-            var delivery = system.GetDeliveries().ToList()[0];
-            delivery.StatusChanged += status =>
+            try
             {
-                Console.WriteLine($"Повторне повідомлення: статус змінено на {status}");
-            };
-
-            delivery.StatusChanged += delegate (StatusType status)
+                user.AddDelivery("Вугілля", 450,-200, "Вінниця", "Житомир");
+            }
+            catch (ArgumentOutOfRangeException ex)
             {
-                Console.WriteLine($"Втретє виводимо зміну статусу на {status}");
-            };
+                Console.WriteLine(ex.Message);
+            }            
 
-            admin.MarkAsInProgress(delivery);          
+            try
+            {
+                var delivery = system.GetDeliveries().ToArray()[1];
+            }
+            catch (Exception ex) when (ex.Message.Contains("array"))
+            {
+                Console.WriteLine(ex.Message);
+            }          
 
             Console.ReadKey();
         }

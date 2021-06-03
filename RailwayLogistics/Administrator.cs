@@ -8,10 +8,8 @@ namespace RailwayLogistics
 {
     public class Administrator : Client
     {
-        public Administrator(string name, ISystem system) : base(name, system, true)
+        public Administrator(string name, string password, ISystem system) : base(name, password, system, true)
         {
-            Name = name;
-            System = system;
         }
 
         public IEnumerable<Delivery> GetDeliveries()

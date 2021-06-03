@@ -8,7 +8,9 @@ using System.Threading.Tasks;
 namespace RailwayLogistics
 {
     public class System : ISystem
-    { 
+    {
+        private string _adminPassword = "admin";
+
         private List<Delivery> _deliveries;
         private List<Station> _stations;
         private List<Client> _clients;
@@ -64,19 +66,21 @@ namespace RailwayLogistics
         public ReadOnlyCollection<Station> Stations => _stations.AsReadOnly();
         public ReadOnlyCollection<Delivery> Deliveries => _deliveries.AsReadOnly();
 
-        public void AuthoriseNewClient(Client client)
+        public void AuthoriseNewClient(Client client, string password)
         {
+            if (client.IsAdministrator && password != _adminPassword)
+                throw new RegistrationException();
+
             _clients.Add(client);
         }
 
         public IEnumerable<Delivery> GetDeliveries()
-        {
+        {            
             return _deliveries;
         }
 
         public void AddDelivery(Delivery delivery)
         {
-            delivery.StatusChanged += Delivery_StatusChanged;
             _deliveries.Add(delivery);
         }
 
@@ -93,11 +97,6 @@ namespace RailwayLogistics
         public IEnumerable<Station> GetStations()
         {
             return Stations;
-        }
-
-        private void Delivery_StatusChanged(StatusType newStatus)
-        {
-            Console.WriteLine($"Статус замовлення змінено на {newStatus}");
         }
     }
 }

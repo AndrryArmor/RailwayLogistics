@@ -9,7 +9,6 @@ namespace RailwayLogistics
 {
     public class Delivery
     {
-        private StatusType _status;
         private readonly List<Train> _trains;
 
         public Delivery()
@@ -28,19 +27,7 @@ namespace RailwayLogistics
             ArrivalStation = arrivalStation;
         }
 
-        public event StatusChangedEventHandler StatusChanged; 
-        public StatusType Status 
-        { 
-            get
-            {
-                return _status;
-            }
-            private set
-            {
-                _status = value;
-                StatusChanged?.Invoke(_status);
-            }
-        }
+        public StatusType Status { get; private set; }
         public string Good { get; set; }
         public int Weight { get; set; }
         public int Volume { get; set; }
