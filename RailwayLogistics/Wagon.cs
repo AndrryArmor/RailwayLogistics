@@ -19,10 +19,6 @@ namespace RailwayLogistics
             Volume = volume;
         }
 
-        public Wagon(Wagon other) : this(other.Weight, other.MaximumWeight, other.Volume)
-        {
-        }
-
         public int Weight { get; set; }
         public int MaximumWeight { get; set; }
         public int Volume { get; set; }

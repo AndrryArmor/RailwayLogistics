@@ -6,24 +6,13 @@ using System.Threading.Tasks;
 
 namespace RailwayLogistics
 {
-    public class Administrator
+    public class Administrator : Client
     {
-        public Administrator()
-        {
-        }
-
-        public Administrator(string name, System system) : this()
+        public Administrator(string name, ISystem system) : base(name, system, true)
         {
             Name = name;
             System = system;
         }
-
-        public Administrator(Administrator other) : this(other.Name, other.System)
-        {
-        }
-
-        public string Name { get; set; }
-        public System System { get; set; }
 
         public IEnumerable<Delivery> GetDeliveries()
         {
@@ -37,12 +26,12 @@ namespace RailwayLogistics
 
         public void AddTrainToDelivery(Delivery delivery, Train train)
         {
-
+            delivery.AddTrain(train);
         }
 
         public void MarkAsInProgress(Delivery delivery)
         {
-
+            delivery.ChangeStatus(StatusType.InProgress);
         }
     }
 }

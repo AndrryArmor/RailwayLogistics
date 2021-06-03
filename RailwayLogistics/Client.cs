@@ -6,38 +6,21 @@ using System.Threading.Tasks;
 
 namespace RailwayLogistics
 {
-    public class Client
+    public abstract class Client
     {
-        public Client()
-        {
-        }
-
-        public Client(string name, System system) : this()
+        protected Client(string name, ISystem system, bool isAdministrator = false)
         {
             Name = name;
             System = system;
-        }
+            IsAdministrator = isAdministrator;
 
-        public Client(Client other) : this(other.Name, other.System)
-        {
+            system.AuthoriseNewClient(this);
+            Console.WriteLine("Відбувся UpCast класу {0} до класу Client",
+                (IsAdministrator ? "Administrator" : "User"));
         }
 
         public string Name { get; set; }
-        public System System { get; set; }
-
-        public IEnumerable<Delivery> GetDeliveries()
-        {
-            return new List<Delivery>();
-        }
-
-        public void AddDelivery(string good, int weight, int volume, string departureStation, string arrivalStation)
-        {
-            Station _departureStation = System.Stations.Where(station => station.Name == departureStation).First();
-            Station _arrivalStation = System.Stations.Where(station => station.Name == arrivalStation).First();
-            Delivery delivery = new Delivery(good, weight, volume, _departureStation, _arrivalStation);
-            delivery.RouteLength = System.CalculateRouteLength(_departureStation, _arrivalStation);
-            delivery.CountPrice();
-            System.AddDelivery(delivery);
-        }
+        public ISystem System { get; set; }
+        public bool IsAdministrator { get; set; }
     }
 }

@@ -7,14 +7,14 @@ using System.Threading.Tasks;
 
 namespace RailwayLogistics
 {
-    public class System
+    public class System : ISystem
     { 
         private List<Delivery> _deliveries;
         private List<Station> _stations;
+        private List<Client> _clients;
 
         public System()
         {
-            IsStarted = false;
             _deliveries = new List<Delivery>();
             _stations = new List<Station>
             {
@@ -52,6 +52,7 @@ namespace RailwayLogistics
                         new Locomotive(37, 190)
                     })
             };
+            _clients = new List<Client>();
         }
 
         public System(IEnumerable<Delivery> deliveries) : this()
@@ -59,24 +60,13 @@ namespace RailwayLogistics
             _deliveries.AddRange(deliveries);
         }
 
-        public System(System other) : this(other.Deliveries)
-        {
-        }
-
-        public bool IsStarted { get; private set; }
-        public Administrator Administrator { get; private set; }
+        public ReadOnlyCollection<Client> Clients => _clients.AsReadOnly();
         public ReadOnlyCollection<Station> Stations => _stations.AsReadOnly();
         public ReadOnlyCollection<Delivery> Deliveries => _deliveries.AsReadOnly();
 
-        public void Start()
+        public void AuthoriseNewClient(Client client)
         {
-            Administrator = new Administrator("Admin", this);
-            IsStarted = true;
-        }
-
-        public Client AuthoriseNewClient(string name)
-        {
-            return new Client(name, this);
+            _clients.Add(client);
         }
 
         public IEnumerable<Delivery> GetDeliveries()
@@ -96,12 +86,12 @@ namespace RailwayLogistics
 
         public Train CreateTrain(Locomotive locomotive, IEnumerable<Wagon> wagons)
         {
-            return new Train();
+            return new Train(locomotive, wagons);
         }
 
         public IEnumerable<Station> GetStations()
         {
-            return new List<Station>();
+            return Stations;
         }
     }
 }

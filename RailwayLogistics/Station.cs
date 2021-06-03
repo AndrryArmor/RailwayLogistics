@@ -21,10 +21,6 @@ namespace RailwayLogistics
             Locomotives.AddRange(locomotives);
         }
 
-        public Station(Station other) : this(other.Name, other.Wagons, other.Locomotives)
-        {
-        }
-
         public string Name { get; set; }
         public List<Locomotive> Locomotives { get; set; }
         public List<Wagon> Wagons { get; set; }

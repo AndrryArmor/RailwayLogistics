@@ -13,14 +13,10 @@ namespace RailwayLogistics
             Wagons = new List<Wagon>();
         }
 
-        public Train(Locomotive locomotive, List<Wagon> wagons) : this()
+        public Train(Locomotive locomotive, IEnumerable<Wagon> wagons) : this()
         {
             Locomotive = locomotive;
             Wagons.AddRange(wagons);
-        }
-
-        public Train(Train other) : this(other.Locomotive, other.Wagons) 
-        {
         }
 
         public Locomotive Locomotive { get; set; }
