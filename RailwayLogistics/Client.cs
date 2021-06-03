@@ -15,8 +15,6 @@ namespace RailwayLogistics
             IsAdministrator = isAdministrator;
 
             system.AuthoriseNewClient(this);
-            Console.WriteLine("Відбувся UpCast класу {0} до класу Client",
-                (IsAdministrator ? "Administrator" : "User"));
         }
 
         public string Name { get; set; }

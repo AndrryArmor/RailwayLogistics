@@ -13,17 +13,23 @@ namespace RailwayLogistics
         static void Main(string[] args)
         {
             System system = new System();
-            new Administrator("Admin", system);
-            new User("Oleksii", system);
+            var admin = new Administrator("Admin", system);
+            var user = new User("Oleksii", system);
 
-            var user = (User)system.Clients.Where(client => !client.IsAdministrator).FirstOrDefault();
             user.AddDelivery("Пшениця", 150, 180, "Київ", "Вінниця");
-            Console.WriteLine("Відбувся DownCast класу Client до класу User");
+            Console.WriteLine("Замовлення додано");
+            var delivery = system.GetDeliveries().ToList()[0];
+            delivery.StatusChanged += status =>
+            {
+                Console.WriteLine($"Повторне повідомлення: статус змінено на {status}");
+            };
 
-            var admin = (Administrator)system.Clients.Where(client => client.IsAdministrator).FirstOrDefault();
-            var deliveries = new List<Delivery>(admin.GetDeliveries());
-            admin.MarkAsInProgress(deliveries[0]);
-            Console.WriteLine("Відбувся DownCast класу Client до класу Administrator");
+            delivery.StatusChanged += delegate (StatusType status)
+            {
+                Console.WriteLine($"Втретє виводимо зміну статусу на {status}");
+            };
+
+            admin.MarkAsInProgress(delivery);          
 
             Console.ReadKey();
         }

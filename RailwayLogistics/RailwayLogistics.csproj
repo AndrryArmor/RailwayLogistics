@@ -45,6 +45,7 @@
   <ItemGroup>
     <Compile Include="Administrator.cs" />
     <Compile Include="Client.cs" />
+    <Compile Include="StatusChangedEventHandler.cs" />
     <Compile Include="User.cs" />
     <Compile Include="Delivery.cs" />
     <Compile Include="Locomotive.cs" />

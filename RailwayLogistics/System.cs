@@ -76,6 +76,7 @@ namespace RailwayLogistics
 
         public void AddDelivery(Delivery delivery)
         {
+            delivery.StatusChanged += Delivery_StatusChanged;
             _deliveries.Add(delivery);
         }
 
@@ -92,6 +93,11 @@ namespace RailwayLogistics
         public IEnumerable<Station> GetStations()
         {
             return Stations;
+        }
+
+        private void Delivery_StatusChanged(StatusType newStatus)
+        {
+            Console.WriteLine($"Статус замовлення змінено на {newStatus}");
         }
     }
 }
